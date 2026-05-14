@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-def input_temperature(temp_str : str)->int:
+def input_temperature(temp_str: str) -> int:
     if not temp_str:
         raise TypeError
     res = 0
@@ -19,17 +19,22 @@ def input_temperature(temp_str : str)->int:
         res += int(temp_str[i])
     return (res * sign)
 
-def test_temperature(temp_str : str)-> str:
+
+def test_temperature(temp_str: str) -> str:
     print(f"Input data is '{temp_str}'")
     try:
         tmp = input_temperature(temp_str)
     except TypeError:
-        print(f"Caught input_temperature error: invalid literal for int() with base 10: '{temp_str}'\n")
+        print(
+            f"Caught input_temperature error:"
+            f"invalid literal for int() with base 10: '{temp_str}'\n"
+        )
     else:
         print(f"Temperature is now {tmp}°C\n")
     finally:
         return ("Tests completed")
-        
+
+
 if __name__ == "__main__":
     print("=== Garden Temperature ===\n")
     x = test_temperature("25")
