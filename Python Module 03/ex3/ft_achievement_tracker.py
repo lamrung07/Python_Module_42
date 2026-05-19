@@ -9,6 +9,11 @@ def gen_player_achievements() -> set:
     Player_acs = random.sample(Acs, acs_number)
     return set(Player_acs)
     
+def personal_achievement(person, others) -> set:
+    for other in others:
+        person = person.different(other)
+    return person
+
 def main() -> None:
     All_acs = ['Crafting Genius', 'Strategist', 'World Savior', 'Speed Runner', 'Survivor',
 'Master Explorer', 'Treasure Hunter', 'Unstoppable', 'First Steps', 'Collector Supreme', 'Untouchable',
@@ -25,6 +30,7 @@ def main() -> None:
             Com_acs = Acs[i]
         print(f"Player {Players[i]}: {Acs[i]}")
         i += 1
+    for 
     print("\n")
     print(f"All distinct achievements: {All_acs}\n")
     print(f"Common achievements: {Com_acs}\n")
