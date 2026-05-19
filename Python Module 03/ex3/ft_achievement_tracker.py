@@ -11,29 +11,35 @@ def gen_player_achievements() -> set:
     
 def personal_achievement(person, others) -> set:
     for other in others:
-        person = person.different(other)
+        if other != person:
+            person = person.difference(other)
     return person
 
 def main() -> None:
-    All_acs = ['Crafting Genius', 'Strategist', 'World Savior', 'Speed Runner', 'Survivor',
+    Achievements = {'Crafting Genius', 'Strategist', 'World Savior', 'Speed Runner', 'Survivor',
 'Master Explorer', 'Treasure Hunter', 'Unstoppable', 'First Steps', 'Collector Supreme', 'Untouchable',
-'Sharp Mind', 'Boss Slayer']
+'Sharp Mind', 'Boss Slayer'}
+    All_acs = Achievements
     Players = ['Alice', 'Bob', 'Charlie', 'Dylan']
-    Acs     = [None] * 4
+    Acs     = [None] * len(Players)
     i = 0
+    Com_acs = All_acs
     for i in range(0, len(Acs)):
         Acs[i] = gen_player_achievements()
         if i != 0:
             All_acs = Acs[i].union(Acs[i - 1])
-            Com_acs = Acs[i].intersection(Com_acs)
-        else:
-            Com_acs = Acs[i]
+        Com_acs = Acs[i].intersection(Com_acs)
         print(f"Player {Players[i]}: {Acs[i]}")
         i += 1
-    for 
+    print(f"\nAll distinct achievements: {All_acs}\n")
+    i = 0
+    print(f"\nCommon achievements: {Com_acs}\n")
+    for i in range(0, len(Players)):
+        print(f"Only {Players[i]} has: {personal_achievement(Acs[i], Acs)}")
     print("\n")
-    print(f"All distinct achievements: {All_acs}\n")
-    print(f"Common achievements: {Com_acs}\n")
+    i = 0
+    for i in range(0, len(Players)):
+        print(f"{Players[i]} is missing: {Achievements.difference(Acs[i])}")
         
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===\n")
