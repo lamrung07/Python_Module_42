@@ -1,4 +1,4 @@
-#!bin/usr/env python3
+#!/usr/bin/env python3
 import sys
 
 def handle_input(inv_sys : str) -> list:
