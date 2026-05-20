@@ -27,7 +27,7 @@ def find_most_least(inv_sys):
 
     return keys[most_idx], values[most_idx], keys[least_idx], values[least_idx]
 
-def main():
+def main() -> None:
     inv_sys = {}
     for i in range(1, len(sys.argv)):
         try:
