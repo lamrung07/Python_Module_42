@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import math
 
+
 def check_input(n) -> float:
     try:
         n = float(n)
@@ -8,6 +9,7 @@ def check_input(n) -> float:
         raise ValueError (f"Error on parameter '{n}':  could not convert string to float: '{n}'")
     else:
         return round(n, 1)
+
 
 def get_player_pos() -> tuple:
     while True:
@@ -24,11 +26,13 @@ def get_player_pos() -> tuple:
         else:
             return (pos[0], pos[1], pos[2])
 
-def cal_distance(pos1 : tuple, pos2 : tuple) -> float:
+
+def cal_distance(pos1: tuple, pos2: tuple) -> float:
     x1, y1, z1 = pos1[0], pos1[1], pos1[2]
     x2, y2, z2 = pos2[0], pos2[1], pos2[2]
     res = math.sqrt((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)
     return round(res, 4)
+
 
 def main() -> None:
     print("=== Game Coordinate System ===")
@@ -42,6 +46,7 @@ def main() -> None:
     print("\nGet a second set of coordinates")
     pos2 = get_player_pos()
     print(f"Distance between the 2 sets of coordinates: {cal_distance(pos1, pos2)}")
-    
+
+
 if __name__ == "__main__":
     main()

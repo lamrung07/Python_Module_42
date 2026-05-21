@@ -9,10 +9,11 @@ def handle_input(inv_sys: str) -> list:
     try:
         a = inv[0]
         b = int(inv[1])
-    except:
-        raise SyntaxError(f"Quantity error for '{inv[0]}':"
-                          f" invalid literal for int() with base 10:"
-                          f"'{inv[1]}'")
+    except SyntaxError:
+        return (
+            f"Quantity error for '{inv[0]}': "
+            f"invalid literal for int() with base 10: '{inv[1]}'"
+        )
     else:
         return [a, b]
 

@@ -3,10 +3,12 @@ import random
 
 
 def gen_player_achievements() -> set:
-    Acs = ['Crafting Genius', 'Strategist', 'World Savior', 'Speed Runner',
-            'Survivor', 'Master Explorer', 'Treasure Hunter', 'Unstoppable',
-            'First Steps', 'Collector Supreme', 'Untouchable', 'Sharp Mind',
-            'Boss Slayer']
+    Acs = [
+        'Crafting Genius', 'Strategist', 'World Savior', 'Speed Runner',
+        'Survivor', 'Master Explorer', 'Treasure Hunter', 'Unstoppable',
+        'First Steps', 'Collector Supreme', 'Untouchable', 'Sharp Mind',
+        'Boss Slayer'
+        ]
     acs_number = random.randint(0, len(Acs))
     Player_acs = random.sample(Acs, acs_number)
     return set(Player_acs)
@@ -20,11 +22,13 @@ def personal_achievement(person, others) -> set:
 
 
 def main() -> None:
-    All_acs = {'Crafting Genius', 'Strategist', 'World Savior', 
-                'Speed Runner', 'Survivor', 'Master Explorer', 
-                'Treasure Hunter', 'Unstoppable', 'First Steps',
-                'Collector Supreme', 'Untouchable', 'Sharp Mind', 
-                'Boss Slayer'}
+    All_acs = {
+            'Crafting Genius', 'Strategist', 'World Savior',
+            'Speed Runner', 'Survivor', 'Master Explorer',
+            'Treasure Hunter', 'Unstoppable', 'First Steps',
+            'Collector Supreme', 'Untouchable', 'Sharp Mind',
+            'Boss Slayer'
+        }
     Dis_acs = All_acs
     Players = ['Alice', 'Bob', 'Charlie', 'Dylan']
     Acs = [None] * len(Players)

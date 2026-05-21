@@ -2,7 +2,8 @@
 import sys
 import typing
 
-def main():
+
+def main() -> None:
     if (len(sys.argv) == 1):
         print(f"Usage: {sys.argv[0]} <file>")
         return
@@ -14,7 +15,7 @@ def main():
     try:
         f = open(file_name)
     except Exception as e:
-        print(f"Error opening file {file_name}: {e}")
+        print(f"Error opening file '{file_name}': {e}")
     else:
         print("---\n")
         print(f"{io.read(f)}\n")
