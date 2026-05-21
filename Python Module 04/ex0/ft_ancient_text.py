@@ -15,6 +15,10 @@ def main():
         f = open(file_name)
     except Exception as e:
         print(f"Error opening file {file_name}: {e}")
+    else:
+        print("---\n")
+        print(f"{io.read(f)}\n")
+        print("---")
 
 if __name__ == "__main__":
     main()
