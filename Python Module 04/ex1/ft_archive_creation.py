@@ -30,15 +30,21 @@ def main() -> None:
         if (new_file_name == ""):
             print("Not saving data.")
             return
-        n = open(new_file_name, 'w')
-        i = 1
-        for new_line in new:
-            n.write(new_line + '#')
-            if i != len(new):
-                n.write('\n')
-            i += 1
-        n.close()
-
+        try:
+            n = open(new_file_name, 'w')
+        except OSError as e:
+            print(f"Error opening file '{new_file_name}': {e}")
+        else:
+            i = 1
+            for new_line in new:
+                n.write(new_line + '#')
+                if i != len(new):
+                    n.write('\n')
+                i += 1
+        finally:
+            n.close()
+            print(f"Saving data to '{new_file_name}'")
+            print(f"Data saved in file '{new_file_name}'.")
 
 if __name__ == "__main__":
     main()
