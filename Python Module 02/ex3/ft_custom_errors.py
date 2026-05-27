@@ -29,14 +29,14 @@ def raise_planterror(message) -> None:
     try:
         raise PlantError(message)
     except PlantError as e:
-        print(f"{e}\n")
+        print(f"{e}")
 
 
 def raise_watererror(message) -> None:
     try:
         raise WaterError(message)
     except WaterError as e:
-        print(f"{e}\n")
+        print(f"{e}")
 
 
 def raise_gardenerror(message) -> None:
@@ -51,15 +51,16 @@ if __name__ == "__main__":
 
     print("Testing PlantError...")
     raise_planterror("The tomato plant is wilting!")
-
+    print()
     print("Testing WaterError...")
     raise_watererror("Not enough water in the tank!")
-
+    print()
     print("Testing catching all garden errors...")
     errors = [
         "The tomato plant is wilting!",
         "Not enough water in the tank!",
     ]
+    print()
     for error in errors:
         raise_gardenerror(error)
-    print("All custom error types work correctly!")
+    print("\nAll custom error types work correctly!")
