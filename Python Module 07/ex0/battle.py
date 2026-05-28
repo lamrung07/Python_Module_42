@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from ex0 import FlameFactory, AquaFactory
 
-def ft_test_factory(factory):
+def ft_test_factory(factory) -> None:
     print("Testing factory")
     print(f"{factory.create_base().describe()}")
     print(f"{factory.create_base().attack()}")
@@ -9,7 +9,7 @@ def ft_test_factory(factory):
     print(f"{factory.create_evolved().attack()}")
     print()
 
-def ft_test_battle(factory1, factory2):
+def ft_test_battle(factory1, factory2) -> None:
     print("Testing battle")
     print(f"{factory1.create_base().describe()}")
     print("vs.")
