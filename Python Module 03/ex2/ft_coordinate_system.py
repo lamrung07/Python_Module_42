@@ -5,15 +5,17 @@ import math
 def check_input(n) -> float:
     try:
         n = float(n)
-    except:
-        raise ValueError (f"Error on parameter '{n}':  could not convert string to float: '{n}'")
+    except Exception:
+        raise ValueError(f"Error on parameter '{n}':"
+                         f"could not convert string to float: '{n}'")
     else:
         return round(n, 1)
 
 
 def get_player_pos() -> tuple:
     while True:
-        pos = input("Enter new coordinates as floats in format 'x,y,z': ").split(',')
+        player = input("Enter new coordinates as floats in format 'x,y,z': ")
+        pos = player.split(',')
         if len(pos) != 3:
             print("Invalid syntax")
             continue
@@ -36,16 +38,15 @@ def cal_distance(pos1: tuple, pos2: tuple) -> float:
 
 def main() -> None:
     print("=== Game Coordinate System ===")
-    
     print("\nGet a first set of coordinates")
     pos1 = get_player_pos()
     print(f"Got a first tuple: {pos1}")
     print(f"It includes: X={pos1[0]}, Y={pos1[1]}, Z={pos1[2]}")
     print(f"Distance to center: {cal_distance(pos1, (0,0,0))}")
-    
     print("\nGet a second set of coordinates")
     pos2 = get_player_pos()
-    print(f"Distance between the 2 sets of coordinates: {cal_distance(pos1, pos2)}")
+    print(f"Distance between the 2 sets of coordinates: "
+          f"{cal_distance(pos1, pos2)}")
 
 
 if __name__ == "__main__":
