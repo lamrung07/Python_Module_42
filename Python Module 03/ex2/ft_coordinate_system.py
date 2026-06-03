@@ -15,14 +15,15 @@ def check_input(n) -> float:
 def get_player_pos() -> tuple:
     while True:
         player = input("Enter new coordinates as floats in format 'x,y,z': ")
-        pos = player.split(',')
+        x_y_z = player.split(',')
+        pos = [0.0]*3
         if len(pos) != 3:
             print("Invalid syntax")
             continue
         try:
-            pos[0] = check_input(pos[0])
-            pos[1] = check_input(pos[1])
-            pos[2] = check_input(pos[2])
+            pos[0] = check_input(x_y_z[0])
+            pos[1] = check_input(x_y_z[1])
+            pos[2] = check_input(x_y_z[2])
         except ValueError as e:
             print(f"{e}")
         else:
