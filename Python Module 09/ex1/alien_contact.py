@@ -37,22 +37,14 @@ class AlienContact(BaseModel):
                 raise ValueError("Telepathic contact requires at least 3 witnesses")
         if self.signal_strength > 7.0 and self.message_received == None:
             raise ValueError(" Strong signals (> 7.0) should include received messages")
+        return self
 
-def print_error(msg: str) -> None:
-    i = 0
-    msg_len = len(msg)
-    while (msg[i] != ','):
-        i += 1
-    i += 2
-    while (i < msg_len):
-        print(msg[i], end='')
-        i += 1
 
 def main():
     try:
         MarsContact = AlienContact(
                         contact_id='AC_2024_001',
-                        timestamp=datetime.now(),
+                        timestamp=datetime(2022, 7, 4, 14, 30, 0),
                         location='Area 51, Nevada',
                         contact_type='physical',
                         signal_strength=8.5,
@@ -62,10 +54,9 @@ def main():
                         is_verified=False
                     )
     except ValidationError as e:
-        print("Expected validation error:")
+        print ("Expected validation error:")
         for error in e.errors():
-            print_error(error['msg'])
-            print()
+            print(f"{error['msg']} (field: {error['loc'][0]})")
         return
 
     print("Alien Contact Log Validation")
@@ -73,7 +64,7 @@ def main():
     print(f"Valid contact report:")
     print(f"ID: {MarsContact.contact_id}")
     print(f"Timestamp: {MarsContact.timestamp}")
-    print(f"Type: {MarsContact.contact_type}")
+    print(f"Type: {MarsContact.contact_type.value}")
     print(f"Location: {MarsContact.location}")
     print(f"Signal: {MarsContact.signal_strength}/10")
     print(f"Duration: {MarsContact.duration_minutes} minutes")
