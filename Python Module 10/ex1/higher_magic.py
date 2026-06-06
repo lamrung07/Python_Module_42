@@ -2,6 +2,7 @@
 from collections.abc import Callable
 
 '''Grimoire functions for use'''
+
 def heal(target: str, power: int) -> str:
     return f"Heal restores {target} for {power} HP"
 
