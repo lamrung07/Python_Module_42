@@ -43,7 +43,7 @@ def main() -> None:
     pos1 = get_player_pos()
     print(f"Got a first tuple: {pos1}")
     print(f"It includes: X={pos1[0]}, Y={pos1[1]}, Z={pos1[2]}")
-    print(f"Distance to center: {cal_distance(pos1, (0,0,0))}")
+    print(f"Distance to center: {cal_distance(pos1, (0, 0, 0))}")
     print("\nGet a second set of coordinates")
     pos2 = get_player_pos()
     print(f"Distance between the 2 sets of coordinates: "
