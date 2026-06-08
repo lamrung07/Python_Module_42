@@ -10,7 +10,7 @@ def handle_input(inv_sys: str) -> list:
         a = inv[0]
         b = int(inv[1])
     except SyntaxError:
-        return (
+        raise (
             f"Quantity error for '{inv[0]}': "
             f"invalid literal for int() with base 10: '{inv[1]}'"
         )
