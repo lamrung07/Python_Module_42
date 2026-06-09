@@ -7,6 +7,7 @@ def main():
             'Alice', 'bob', 'Charlie', 'dylan',
             'Emma', 'Gregory', 'john', 'kevin', 'Liam'
             ]
+    print(f"Initial list of players: {Players}")
     Cap_Players = [name.capitalize() for name in Players]
     Cap_only_Players = [name for name in Players if name[0].isupper()]
     print(f"New list with all names capitalized: {Cap_Players}")

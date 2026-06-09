@@ -2,7 +2,8 @@
 import sys
 
 
-def handle_input(inv_sys: str):
+# Handle the <item_name>:<quantity> form input---------------------
+def handle_input(inv_sys: str) -> tuple[str, int]:
     inv = inv_sys.split(":")
     if (len(inv) != 2):
         raise SyntaxError(f"Error - invalid parameter '{inv_sys}'")
@@ -15,7 +16,8 @@ def handle_input(inv_sys: str):
         return a, b
 
 
-def find_most_least(inv_sys):
+# Find most and least value in inv_sys------------------------------
+def find_most_least(inv_sys) -> tuple[str, int, str, int]:
     keys = list(inv_sys.keys())
     values = list(inv_sys.values())
 
@@ -31,6 +33,7 @@ def find_most_least(inv_sys):
 
 
 def main() -> None:
+    print("=== Inventory System Analysis ===")
     inv_sys = {}
     for i in range(1, len(sys.argv)):
         try:
@@ -38,9 +41,12 @@ def main() -> None:
             if a in inv_sys:
                 print(f"Redundant item '{a}' - discarding")
             else:
-                inv_sys.update({a : b})
-        except SyntaxError as e:
+                inv_sys.update({a: b})
+        except (SyntaxError, ValueError) as e:
             print(f"{e}")
+    if not inv_sys:
+        print("No valid items received - Abort")
+        return
     print(f"Got inventory: {inv_sys}")
     print(f"Item list: {list(inv_sys.keys())}")
     total = sum(list(inv_sys.values()))
@@ -50,14 +56,13 @@ def main() -> None:
         per = round(inv_sys[a]/total * 100, 1)
         print(f"Item {a} represents {per}%")
 
-    # most_key, most_val, least_key, least_val = find_most_least(inv_sys)
-    # print(f"Item most abundant: {most_key} with quantity {most_val}")
-    # print(f"Item least abundant: {least_key} with quantity {least_val}")
+    most_key, most_val, least_key, least_val = find_most_least(inv_sys)
+    print(f"Item most abundant: {most_key} with quantity {most_val}")
+    print(f"Item least abundant: {least_key} with quantity {least_val}")
 
-    # inv_sys.update({"magic_item": 1})
-    # print(f"Updated inventory: {inv_sys}")
+    inv_sys.update({"magic_item": 1})
+    print(f"Updated inventory: {inv_sys}")
 
 
 if __name__ == "__main__":
-    print("=== Inventory System Analysis ===")
     main()
