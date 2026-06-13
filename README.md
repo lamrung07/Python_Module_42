@@ -1,6 +1,6 @@
-# 🐍 42 School — Python Piscine
+# 🐍 42 School — Python Module
 
-> A 10-module journey through Python fundamentals, built exercise by exercise at [École 42](https://42.fr).
+> A 11-module journey through Python fundamentals, built exercise by exercise at [École 42](https://42.fr).
 
 ---
 
