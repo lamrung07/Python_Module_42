@@ -2,6 +2,7 @@
 import sys
 import typing
 
+
 def write_to_file(file_name: str, new_content: typing.List[str]) -> None:
     try:
         n = open(file_name, 'w')
@@ -44,8 +45,10 @@ def main() -> None:
         for new_line in new_content:
             print(f"{new_line}#")
         print("\n---")
-        print("Enter new file name (or empty):", end='', flush = True)
-        new_file_name = sys.stdin.readline().rstrip() #remove \n after file name
+        print("Enter new file name (or empty):", end='', flush=True)
+
+        # Remove \n after file name
+        new_file_name = sys.stdin.readline().rstrip()
         if (new_file_name == ""):
             print("Not saving data.")
             return

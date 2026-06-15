@@ -1,21 +1,26 @@
 #!/usr/bin/env python3
 import sys
-import typing
 
 
 def main() -> None:
+
+    # Require 2 arguments
     if (len(sys.argv) == 1):
         print(f"Usage: {sys.argv[0]} <file>")
         return
     elif (len(sys.argv) != 2):
         print("Invalid input quantity! Please retry")
         return
+
+    # Print program's header 
     print("=== Cyber Archives Recovery ===")
     file_name = sys.argv[1]
     print(f"Accessing file '{file_name}'")
+
+    # Handle I/O Exceptions
     try:
         f = open(file_name, 'r')
-    except Exception as e:
+    except OSError as e:
         print(f"Error opening file '{file_name}': {e}")
     else:
         print("---\n")

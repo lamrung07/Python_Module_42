@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys
-import typing
+
 
 def main() -> None:
     if (len(sys.argv) == 1):
@@ -46,6 +46,6 @@ def main() -> None:
             print(f"Saving data to '{new_file_name}'")
             print(f"Data saved in file '{new_file_name}'.")
 
+
 if __name__ == "__main__":
     main()
-    
