@@ -4,6 +4,10 @@ import typing
 
 
 def write_to_file(file_name: str, new_content: typing.List[str]) -> None:
+    """
+    Function receive file_name and new_content
+    Handle ERRORS and print messages with clear prefix
+    """
     try:
         n = open(file_name, 'w')
     except OSError as e:
@@ -22,20 +26,26 @@ def write_to_file(file_name: str, new_content: typing.List[str]) -> None:
 
 
 def main() -> None:
+
+    # Check arguments quantity (2 required)
     if (len(sys.argv) == 1):
         print(f"Usage: {sys.argv[0]} <file>")
         return
     elif (len(sys.argv) != 2):
         print("Invalid input quantity! Please retry")
         return
+
+    # Print program's header
     print("=== Cyber Archives Recovery & Preservation ===")
     file_name = sys.argv[1]
     print(f"Accessing file '{file_name}'")
+
+    # Access the file, while handle all possible errors
     try:
         f = open(file_name, 'r')
         content = str(f.read())
         new_content = str(content).split('\n')
-    except Exception as e:
+    except OSError as e:
         sys.stderr.write(f"[STDERR] Error opening file '{file_name}': {e}\n")
     else:
         print(f"---\n\n{content}\n\n---")
@@ -46,7 +56,9 @@ def main() -> None:
             print(f"{new_line}#")
         print("\n---")
         print("Enter new file name (or empty):", end='', flush=True)
-        '''remove \n after file name'''
+
+        # Get new_file name without input()
+        # Remove \n after new_file name with rstrip
         new_file_name = sys.stdin.readline().rstrip()
         if (new_file_name == ""):
             print("Not saving data.")

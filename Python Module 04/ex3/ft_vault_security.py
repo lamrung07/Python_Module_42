@@ -2,7 +2,12 @@
 
 def secure_archive(
         file_name: str,
-        action: int, content="") -> tuple[bool, str]:
+        action: int,
+        content="") -> tuple[bool, str]:
+    """
+    Handling file use 'with' statement
+    Take in file_name, action return bool value with message
+    """
     try:
         if action == 1:
             return_val = ""
@@ -14,9 +19,13 @@ def secure_archive(
         elif action == 2:
             with open(file_name, "a") as file:
                 file.write('\n' + content)
-            print("Using 'secure_archive' to"
-                  "write previous content to a new file:")
+            print("Using 'secure_archive' to write previous"
+                  "content to a new file:")
             return (True, content)
+        else:
+            return (False, "ERROR! Invalid action, please try again")
+
+    # Catch all the I/O Exceptions
     except FileNotFoundError as e:
         print("Using 'secure_archive' to read from a nonexistent file:")
         return (False, f"{e}")
@@ -35,9 +44,7 @@ if __name__ == "__main__":
     (acc, content) = secure_archive(file_name, 1, content)
     print(f"({acc}, '{content}')")
     (acc, content) = secure_archive(
-                        file_name, 2,
-                        content="Content successfully written to file"
-                    )
+        file_name, 2, content="Content successfully written to file")
     print(f"({acc}, '{content}')")
     (acc, content) = secure_archive("domix.txt", 1, content)
     print(f"({acc}, '{content}')")

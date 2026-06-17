@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from .dark_spellbook import dark_spell_allowed_ingredients
-#import alchemy.grimoire.dark_spellbook as spellbook
+import alchemy.grimoire.dark_spellbook as spellbook
+
 
 def validate_ingredients(ingredients: str) -> str:
     validated = False
@@ -18,4 +19,3 @@ def validate_ingredients(ingredients: str) -> str:
     else:
         return_str += ingredients + ' - INVALID'
     return return_str
-        
