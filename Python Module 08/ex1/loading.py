@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-#-------Check installation-----------#
-
+# Check installation
 def show_instruction() -> None:
     print("\nPip vs Poetry installation instructions")
     print("-" * 40)
@@ -62,7 +61,8 @@ if __name__ == "__main__":
     print("- Flow: Requests data using request -> Manipulate using pandas")
     print("        Using numpy to calculate -> Using matplotlib for visualization")
     print("❗When missing dependencies occur, program might stop and show installation instructions for pip and Poetry ❗\n")
-    #Requests data to analyze---------------------------------------#
+
+    # Requests data to analyze
     check_rq = False
     check_pd = False
     check_np = False
@@ -81,12 +81,14 @@ if __name__ == "__main__":
         )
         response = rq.get(URL)
         data = response.json()
-    #---Pandas for data manipulation-------------------------------#
+
+        # Pandas for data manipulation
         if check_pandas():
             check_pd = True
             import pandas as pd
             dataframe = pd.DataFrame(data["hourly"])
-    #-------Numpy for computations and simulated Matrix data-------#
+
+            # Numpy for computations and simulated Matrix data
             if check_numpy():
                 check_np = True
                 import numpy as np
@@ -101,7 +103,8 @@ if __name__ == "__main__":
                         np.std(matrix),
                         size=(100, 4)
                     )
-    #-----------Matplotlib for visualization-----------------------#
+
+                # Matplotlib for visualization
                 if check_matplotlib():
                     check_plt = True
                     import matplotlib.pyplot as plt
@@ -121,4 +124,3 @@ if __name__ == "__main__":
         print("Simulated matrix shape:", simulated_matrix.shape)
     if check_plt:
         print("\nTemperature Forecast complete!\nResults saved to: matrix_analysis.png")
-
