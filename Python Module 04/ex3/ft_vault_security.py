@@ -18,6 +18,8 @@ def secure_archive(
             print("Using 'secure_archive' to write previous"
                   "content to a new file:")
             return (True, content)
+        else:
+            return (False, "ERROR! Invalid action, please try again")
     except FileNotFoundError as e:
         print("Using 'secure_archive' to read from a nonexistent file:")
         return (False, f"{e}")

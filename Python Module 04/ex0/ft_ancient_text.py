@@ -3,8 +3,13 @@ import sys
 
 
 def main() -> None:
+    """
+    This program read file content
+    Handle all possible ERROR
+    and display it to terminal like cat command
+    """
 
-    # Require 2 arguments
+    # Check arguments quantity (2 required)
     if (len(sys.argv) == 1):
         print(f"Usage: {sys.argv[0]} <file>")
         return
@@ -12,7 +17,7 @@ def main() -> None:
         print("Invalid input quantity! Please retry")
         return
 
-    # Print program's header 
+    # Print program's header
     print("=== Cyber Archives Recovery ===")
     file_name = sys.argv[1]
     print(f"Accessing file '{file_name}'")
