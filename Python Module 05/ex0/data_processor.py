@@ -97,7 +97,8 @@ if __name__ == "__main__":
     # TEST NumericProcessor()
     num_proc = NumericProcessor()
     print("Testing Numeric Processor...")
-    print(f"Trying to validate input '42': {num_proc.validate([4,5.00,10,9])}")
+    print(f"Trying to validate input '42': "
+          f"{num_proc.validate([4, 5.00, 10, 9])}")
     print(f"Trying to validate input 'Hello': {num_proc.validate('Hello')}")
     try:
         num_proc.ingest("foo")  # type: ignore[arg-type]
