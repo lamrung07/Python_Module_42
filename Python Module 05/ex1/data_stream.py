@@ -202,4 +202,3 @@ if __name__ == "__main__":
         # print(f"  Log entry {rank}: {value}")
     print()
     stream.print_processors_stats()
-    
