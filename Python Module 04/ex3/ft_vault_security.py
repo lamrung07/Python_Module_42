@@ -4,6 +4,10 @@ def secure_archive(
         file_name: str,
         action: int,
         content="") -> tuple[bool, str]:
+    """
+    Handling file use 'with' statement
+    Take in file_name, action return bool value with message
+    """
     try:
         if action == 1:
             return_val = ""
@@ -20,6 +24,8 @@ def secure_archive(
             return (True, content)
         else:
             return (False, "ERROR! Invalid action, please try again")
+
+    # Catch all the I/O Exceptions
     except FileNotFoundError as e:
         print("Using 'secure_archive' to read from a nonexistent file:")
         return (False, f"{e}")

@@ -2,18 +2,22 @@
 import typing
 import abc
 
+
 class DataProcessor(abc.ABC):
     def __init__(self) -> None:
         self.storage = []
         self.rank = 0
         self.total_processed = 0
         pass
+
     @abc.abstractmethod
     def validate(self, data: typing.Any) -> bool:
         pass
+
     @abc.abstractmethod
     def ingest(self, data: typing.Any) -> None:
         pass
+
     def output(self, nb: int) -> list[tuple[int, str]]:
         result = []
         for _ in range(nb):
@@ -30,9 +34,8 @@ class DataProcessor(abc.ABC):
 
     def get_total_processed(self) -> int:
         return self.total_processed
-        
 
-''' ──────────────────────────────────────'''
+
 class NumericProcessor(DataProcessor):
     def validate(self, data: typing.Any) -> bool:
         if type(data) in (int, float):
@@ -66,6 +69,7 @@ class TextProcessor(DataProcessor):
                     return False
             return True
         return False
+
     def ingest(self, data: str | list[str]) -> None:
         if not self.validate(data):
             raise Exception("Got exception: Improper text data")
@@ -92,6 +96,7 @@ class LogProcessor(DataProcessor):
                         return False
             return True
         return False
+
     def ingest(self, data: dict[str:str] | list[dict[str:str]]) -> None:
         if not self.validate(data):
             raise Exception("Got exception: Improper log data")
@@ -102,41 +107,45 @@ class LogProcessor(DataProcessor):
             self.total_processed += 1
 
 
-''' ─── ExportPlugin Protocol ───────────────────────────────────'''
+# ExportPlugin Protocol
 class ExportPlugin(typing.Protocol):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         pass
+
 
 class CSVExportPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("CSV Output:")
         i = len(data) - 1
         for rank, value in data:
-            print(f"{value}",end='')
+            print(f"{value}", end='')
             if i:
-                print(",",end='')
+                print(",", end='')
             i -= 1
         print()
+
 
 class JSONExportPlugin:
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("JSON Output:")
         i = len(data) - 1
-        print("{",end='')
+        print("{", end='')
         for rank, value in data:
             print(f"'item_{rank}': '{value}'", end='')
             if i:
-                print(",",end='')
+                print(",", end='')
             i -= 1
         print("}")
 
 
-''' ─── Data Stream ───────────────────────────────────'''
+# Data Stream
 class DataStream():
     def __init__(self):
         self.processors: list[DataProcessor] = []
+
     def register_processor(self, proc: DataProcessor) -> None:
         self.processors.append(proc)
+
     def process_stream(self, stream: list[typing.Any]) -> None:
         for element in stream:
             handled = False
@@ -146,7 +155,8 @@ class DataStream():
                     handled = True
                     break
             if not handled:
-                print(f"DataStream error - Can't process element in stream: {element}")
+                print(f"DataStream error - "
+                      f"Can't process element in stream: {element}")
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
         for proc in self.processors:
@@ -167,10 +177,11 @@ class DataStream():
                 proc_name = 'Text Processor'
             elif name == 'LogProcessor':
                 proc_name = 'Log Processor'
-            print(f"{proc_name}: total {proc.get_total_processed()} items processed,"
+            print(f"{proc_name}: total "
+                  f"{proc.get_total_processed()} items processed,"
                   f"remaining {proc.get_remaining()} on processor")
-            
-    
+
+
 if __name__ == "__main__":
 
     print("=== Code Nexus - Data Pipeline ===\n")
@@ -188,8 +199,10 @@ if __name__ == "__main__":
         "Hello world",
         [3.14, -1, 2.71],
         [
-            {"log_level": "WARNING", "log_message": "Telnet access! Use ssh instead"},
-            {"log_level": "INFO",    "log_message": "User wil is connected"},
+            {"log_level": "WARNING",
+             "log_message": "Telnet access! Use ssh instead"},
+            {"log_level": "INFO",
+             "log_message": "User wil is connected"},
         ],
         42,
         ["Hi", "five"],
@@ -200,28 +213,27 @@ if __name__ == "__main__":
     stream.register_processor(proc_log)
     stream.process_stream(batch)
     stream.print_processors_stats()
-    
-    
+
     print("\nSend 3 processed data from each processor to a CSV plugin:")
     stream.output_pipeline(3, CSVExportPlugin())
     print()
     stream.print_processors_stats()
-    
-    
+
     '''____Register second batch and process the data_____'''
     batch1 = [
         21,
         ["I love AI", "LLMs are wonderful", "Stay healthy"],
         [
-            {"log_level": "ERROR",  "log_message": "500 server crash"},
-            {"log_level": "NOTICE", "log_message": "Certificate expires in 10 days"},
+            {"log_level": "ERROR",
+             "log_message": "500 server crash"},
+            {"log_level": "NOTICE",
+             "log_message": "Certificate expires in 10 days"},
         ],
         [32, 42, 64, 84, 128, 168],
         "World hello",
     ]
     print(f"\nSend another batch of data: {batch1}\n")
-    
-    
+
     stream.process_stream(batch1)
     stream.print_processors_stats()
     print()
@@ -229,4 +241,3 @@ if __name__ == "__main__":
     stream.output_pipeline(5, JSONExportPlugin())
     print()
     stream.print_processors_stats()
-    
