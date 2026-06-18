@@ -9,6 +9,9 @@ def write_to_file(file_name: str, new_content: typing.List[str]) -> None:
     Handle ERRORS and print messages with clear prefix
     """
     try:
+
+        # "a" mode : write to the end
+        # "w" mode: replace all existing content
         n = open(file_name, 'w')
     except OSError as e:
         sys.stderr.write(f"[STDERR] Error opening file '{file_name}': {e}\n")
@@ -42,6 +45,8 @@ def main() -> None:
 
     # Access the file, while handle all possible errors
     try:
+
+        # "r" mode : read only
         f = open(file_name, 'r')
         content = str(f.read())
         new_content = str(content).split('\n')

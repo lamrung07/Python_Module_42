@@ -9,6 +9,8 @@ def secure_archive(
     Take in file_name, action return bool value with message
     """
     try:
+
+        # Read content from a file
         if action == 1:
             return_val = ""
             with open(file_name, "r") as file:
@@ -16,8 +18,13 @@ def secure_archive(
                     return_val += line.rstrip() + "\\n"
             print("Using 'secure_archive' to read from a regular file:")
             return (True, return_val)
+
+        # Write content to a file
         elif action == 2:
-            with open(file_name, "a") as file:
+
+            # "a" mode : write to the end
+            # "w" mode: replace all existing content
+            with open(file_name, "w") as file:
                 file.write('\n' + content)
             print("Using 'secure_archive' to write previous"
                   "content to a new file:")
@@ -38,7 +45,7 @@ def secure_archive(
 
 
 if __name__ == "__main__":
-    file_name = "ancient_fragment.txt"
+    file_name = "domix.txt"
     action = 1
     content = "helloworld"
     (acc, content) = secure_archive(file_name, 1, content)

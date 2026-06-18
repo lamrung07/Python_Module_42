@@ -27,6 +27,7 @@ class DataProcessor(abc.ABC):
 
 class NumericProcessor(DataProcessor):
     def validate(self, data: typing.Any) -> bool:
+        """Ingests int, float, and lists of both types"""
         if type(data) in (int, float):
             return True
         if type(data) is list:
@@ -37,6 +38,7 @@ class NumericProcessor(DataProcessor):
         return False
 
     def ingest(self, data: int | float | list[int | float]) -> None:
+        """Converts the data into strings and stores it"""
         if not self.validate(data):
             raise Exception("Got exception: Improper numeric data")
         if type(data) is list:
@@ -48,6 +50,7 @@ class NumericProcessor(DataProcessor):
 
 class TextProcessor(DataProcessor):
     def validate(self, data: typing.Any) -> bool:
+        """Ingests str and lists of strings"""
         if type(data) is str:
             return True
         if type(data) is list:
@@ -68,6 +71,7 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
+    """Ingests a dict/list of dict of string key-value pairs"""
     def validate(self, data: typing.Any) -> bool:
         if type(data) is dict:
             for key, val in data.items():
@@ -83,6 +87,7 @@ class LogProcessor(DataProcessor):
         return False
 
     def ingest(self, data: dict[str:str] | list[dict[str:str]]) -> None:
+        """Converts the data into strings and stores it"""
         if not self.validate(data):
             raise Exception("Got exception: Improper log data")
         if type(data) is dict:
@@ -97,9 +102,10 @@ if __name__ == "__main__":
     # TEST NumericProcessor()
     num_proc = NumericProcessor()
     print("Testing Numeric Processor...")
-    print(f"Trying to validate input '42': "
-          f"{num_proc.validate([4, 5.00, 10, 9])}")
+    print(f"Trying to validate input '42': {num_proc.validate(42)}")
     print(f"Trying to validate input 'Hello': {num_proc.validate('Hello')}")
+    print("Test invalid ingestion of string "
+          "'foo' without prior validation:")
     try:
         num_proc.ingest("foo")  # type: ignore[arg-type]
     except Exception as e:
@@ -124,12 +130,12 @@ if __name__ == "__main__":
     print(f"Text value {rank}: {value}")
 
     # TEST LOGProcessor()
-    print("\nTesting Log Processor...")
     log_proc = LogProcessor()
+    print("\nTesting Log Processor...")
     print(f"Trying to validate input 'Hello': {log_proc.validate('Hello')}")
     print("Processing data: [{'log_level': 'NOTICE', "
-          "'log_message': 'Connection to server'}", end='')
-    print(", {'log_level': 'ERROR', 'log_message': "
+          "'log_message': 'Connection to server'}"
+          ", {'log_level': 'ERROR', 'log_message': "
           "'Unauthorized access!!'}]")
     log_proc.ingest([{'log_level': 'NOTICE',
                       'log_message': 'Connection to server'},
