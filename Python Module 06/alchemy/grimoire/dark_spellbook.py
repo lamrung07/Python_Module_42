@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from .dark_validator import validate_ingredients
+# from .dark_validator import validate_ingredients
 import alchemy.grimoire.dark_validator as validator
 
 
