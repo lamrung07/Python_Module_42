@@ -109,9 +109,15 @@ class DataStream():
         self.processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
+        """This method register a new data processor"""
         self.processors.append(proc)
 
     def process_stream(self, stream: list[typing.Any]) -> None:
+        """
+        This method analyze each  element of the list 
+        received as a parameter and send it to the 
+        appropriate registered data processor
+        """
         for element in stream:
             handled = False
             for proc in self.processors:
@@ -119,11 +125,14 @@ class DataStream():
                     proc.ingest(element)
                     handled = True
                     break
+
+            # Case if no processor can handle the data element
             if not handled:
                 print(f"DataStream error - "
                       f"Can't process element in stream: {element}")
 
     def print_processors_stats(self) -> None:
+        """This method print the stream statistics"""
         print("== DataStream statistics ==")
         if not self.processors:
             print("No processor found, no data")
@@ -143,16 +152,15 @@ class DataStream():
 
 if __name__ == "__main__":
     print("=== Code Nexus - Data Stream ===\n")
-    print("Initialize Data Stream...\n== DataStream statistics ==")
     stream = DataStream()
 
-    # ── Initial stats
-    print("Initialize Data Stream...")
+    # Initial stats
+    print("Initialize Data Stream ...")
     stream.print_processors_stats()
     print()
 
-    # ── Register only NumericProcessor first ──
-    print("Registering Numeric Processor")
+    # Register only NumericProcessor
+    print("Registering Numeric Processor\n")
     num_proc = NumericProcessor()
     stream.register_processor(num_proc)
 
