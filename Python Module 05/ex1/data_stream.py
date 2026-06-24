@@ -114,8 +114,8 @@ class DataStream():
 
     def process_stream(self, stream: list[typing.Any]) -> None:
         """
-        This method analyze each  element of the list 
-        received as a parameter and send it to the 
+        This method analyze each  element of the list
+        received as a parameter and send it to the
         appropriate registered data processor
         """
         for element in stream:

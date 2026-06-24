@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-from .light_spellbook import light_spell_allowed_ingredients
+# from .light_spellbook import light_spell_allowed_ingredients
 import alchemy.grimoire.light_spellbook as spellbook
+"""Indirectly import from parent module to avoid dependencies"""
 
 
 def validate_ingredients(ingredients: str) -> str:
