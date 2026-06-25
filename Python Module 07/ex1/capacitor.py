@@ -2,18 +2,18 @@
 from ex1 import HealingCreatureFactory, TransformCreatureFactory
 
 if __name__ == "__main__":
-    #-----Heal_Factory initialize---------#
-    Heal_Factory = HealingCreatureFactory
+
+    # Heal_Factory initialize--------------------
+    Heal_Factory = HealingCreatureFactory()
     Sproutling = Heal_Factory.create_base()
     Bloomelle = Heal_Factory.create_evolved()
-    
-    #-----Trans_Factory initialize---------#
-    Trans_Factory = TransformCreatureFactory
+
+    # Trans_Factory initialize-------------------
+    Trans_Factory = TransformCreatureFactory()
     Shiftling = Trans_Factory.create_base()
     Morphagon = Trans_Factory.create_evolved()
-    
 
-    #------Test healing capability-----------#
+    # Test healing capability--------------------
     print("Testing Creature with healing capability")
     print("base:")
     print(f"{Sproutling.describe()}")
@@ -24,8 +24,8 @@ if __name__ == "__main__":
     print(f"{Bloomelle.attack()}")
     print(f"{Bloomelle.heal("itself and others")}")
     print()
-    
-    #------Test transform capability-----------#
+
+    # Test transform capability------------------
     print("Testing Creature with transform capability")
     print("base:")
     print(f"{Shiftling.describe()}")
@@ -39,5 +39,3 @@ if __name__ == "__main__":
     print(f"{Morphagon.transform()}")
     print(f"{Morphagon.attack()}")
     print(f"{Morphagon.revert()}")
-    
-    
