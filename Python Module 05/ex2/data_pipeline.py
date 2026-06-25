@@ -5,7 +5,7 @@ import abc
 
 class DataProcessor(abc.ABC):
     def __init__(self) -> None:
-        self.storage = []
+        self.storage: list[typing.Any] = []
         self.rank = 0
         self.total_processed = 0
         pass
@@ -97,10 +97,12 @@ class LogProcessor(DataProcessor):
             return True
         return False
 
-    def ingest(self, data: dict[str:str] | list[dict[str:str]]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise Exception("Got exception: Improper log data")
-        if type(data) is dict:
+
+        # isinstance(obj, type)->bool: checks obj is an instance of type
+        if isinstance(data, dict):
             data = [data]
         for item in data:
             self.storage.append(f"{item['log_level']}: {item['log_message']}")
@@ -109,11 +111,12 @@ class LogProcessor(DataProcessor):
 
 # ExportPlugin Protocol
 class ExportPlugin(typing.Protocol):
+    @abc.abstractmethod
     def process_output(self, data: list[tuple[int, str]]) -> None:
         pass
 
 
-class CSVExportPlugin:
+class CSVExportPlugin(ExportPlugin):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("CSV Output:")
         i = len(data) - 1
@@ -125,7 +128,7 @@ class CSVExportPlugin:
         print()
 
 
-class JSONExportPlugin:
+class JSONExportPlugin(ExportPlugin):
     def process_output(self, data: list[tuple[int, str]]) -> None:
         print("JSON Output:")
         i = len(data) - 1
@@ -140,13 +143,19 @@ class JSONExportPlugin:
 
 # Data Stream
 class DataStream():
-    def __init__(self):
+    def __init__(self) -> None:
         self.processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:
+        """This method register a new data processor"""
         self.processors.append(proc)
 
     def process_stream(self, stream: list[typing.Any]) -> None:
+        """
+        This method analyze each  element of the list
+        received as a parameter and send it to the
+        appropriate registered data processor
+        """
         for element in stream:
             handled = False
             for proc in self.processors:
@@ -159,12 +168,17 @@ class DataStream():
                       f"Can't process element in stream: {element}")
 
     def output_pipeline(self, nb: int, plugin: ExportPlugin) -> None:
+        """
+        Extracts nb outputs from each processor
+        Sends them to an export plugin
+        """
         for proc in self.processors:
             res = proc.output(nb)
             if res:
                 plugin.process_output(res)
 
     def print_processors_stats(self) -> None:
+        """This method print the stream statistics"""
         print("== DataStream statistics ==")
         if not self.processors:
             print("No processor found, no data")

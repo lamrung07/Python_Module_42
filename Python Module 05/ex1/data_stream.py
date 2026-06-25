@@ -5,9 +5,9 @@ import abc
 
 class DataProcessor(abc.ABC):
     def __init__(self) -> None:
-        self.storage = []
-        self.rank = 0
-        self.total_processed = 0
+        self.storage: list[typing.Any] = []
+        self.rank: int = 0
+        self.total_processed: int = 0
         pass
 
     @abc.abstractmethod
@@ -94,10 +94,10 @@ class LogProcessor(DataProcessor):
             return True
         return False
 
-    def ingest(self, data: dict[str:str] | list[dict[str:str]]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         if not self.validate(data):
             raise Exception("Got exception: Improper log data")
-        if type(data) is dict:
+        if isinstance(data, dict):
             data = [data]
         for item in data:
             self.storage.append(f"{item['log_level']}: {item['log_message']}")
@@ -105,7 +105,12 @@ class LogProcessor(DataProcessor):
 
 
 class DataStream():
-    def __init__(self):
+    """
+    Receive a stream of data different types
+    Route each element to the appropriate data processor using
+    polymorphic behavior
+    """
+    def __init__(self) -> None:
         self.processors: list[DataProcessor] = []
 
     def register_processor(self, proc: DataProcessor) -> None:

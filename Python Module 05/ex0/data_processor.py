@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import typing
 import abc
+from collections.abc import Sequence
 
 
+# Abstract class DataProcessor-------------------
 class DataProcessor(abc.ABC):
     def __init__(self) -> None:
-        self.storage = []
+        self.storage: list[typing.Any] = []
         self.rank = 0
         pass
 
@@ -25,6 +27,8 @@ class DataProcessor(abc.ABC):
         return (rank, value)
 
 
+# Specialized classes inherit from the DataProcessor class
+
 class NumericProcessor(DataProcessor):
     def validate(self, data: typing.Any) -> bool:
         """Ingests int, float, and lists of both types"""
@@ -37,8 +41,9 @@ class NumericProcessor(DataProcessor):
             return True
         return False
 
-    def ingest(self, data: int | float | list[int | float]) -> None:
+    def ingest(self, data: int | float | Sequence[int | float]) -> None:
         """Converts the data into strings and stores it"""
+        # Sequence: is covariant — subtypes are accepted:
         if not self.validate(data):
             raise Exception("Got exception: Improper numeric data")
         if type(data) is list:
@@ -86,11 +91,13 @@ class LogProcessor(DataProcessor):
             return True
         return False
 
-    def ingest(self, data: dict[str:str] | list[dict[str:str]]) -> None:
+    def ingest(self, data: dict[str, str] | list[dict[str, str]]) -> None:
         """Converts the data into strings and stores it"""
         if not self.validate(data):
             raise Exception("Got exception: Improper log data")
-        if type(data) is dict:
+
+        # isinstance(obj, type)->bool: checks obj is an instance of type
+        if isinstance(data, dict):
             data = [data]
         for item in data:
             self.storage.append(f"{item['log_level']}: {item['log_message']}")
