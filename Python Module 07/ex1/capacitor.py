@@ -16,13 +16,15 @@ if __name__ == "__main__":
     # Test healing capability--------------------
     print("Testing Creature with healing capability")
     print("base:")
+    base_target = "itself"
     print(f"{Sproutling.describe()}")
     print(f"{Sproutling.attack()}")
-    print(f"{Sproutling.heal("itself")}")
+    print(f"{Sproutling.heal(base_target)}")
     print("evolved:")
+    envolved_target = "itself and others"
     print(f"{Bloomelle.describe()}")
     print(f"{Bloomelle.attack()}")
-    print(f"{Bloomelle.heal("itself and others")}")
+    print(f"{Bloomelle.heal(envolved_target)}")
     print()
 
     # Test transform capability------------------

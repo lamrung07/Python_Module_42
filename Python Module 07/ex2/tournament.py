@@ -4,15 +4,15 @@ from ex2 import FlameFactory, AquaFactory
 from ex2 import HealingCreatureFactory, TransformCreatureFactory
 from ex2 import NormalStrategy, AggressiveStrategy, DefensiveStrategy
 
+
 def battle(battles_creatures: list[tuple[typing.Any, typing.Any]]):
-    #--------------Print Battle List-----------------------#
+    # Print Battle List--------------------------
     print("*** Tournament ***")
     print(f"{len(battles_creatures)} opponents involved")
 
-
-    #---------------*BATTLE*--------------------------------#
+    # BATTLE-------------------------------------
     for x in range(len(battles_creatures)):
-        for y in range (x + 1, len(battles_creatures)):
+        for y in range(x + 1, len(battles_creatures)):
             print("\n* Battle *")
             creature_a, strategy_a = battles_creatures[x]
             creature_b, strategy_b = battles_creatures[y]
@@ -27,39 +27,48 @@ def battle(battles_creatures: list[tuple[typing.Any, typing.Any]]):
                 print(f"{e}")
                 return
             y += 1
-    
-        
+
+
 if __name__ == "__main__":
-    #-------Creating Creature---------#
+    # Creating Creature--------------------------
     Healing = HealingCreatureFactory
     Transform = TransformCreatureFactory
     Flaming = FlameFactory
     Aquabub = AquaFactory
-    
-    #-------Creating Strategies-------#
+
+    # Creating Strategies------------------------
     Normal = NormalStrategy()
     Aggressive = AggressiveStrategy()
     Defensive = DefensiveStrategy()
-    
-    #------------Battle--------------#
-    #------------Tournament 0 (basic)------------#
+
+    # Battle-------------------------------------
+    # Tournament 0 (basic)-----------------------
     print("Tournament 0 (basic)")
     print("[ (Flameling+Normal), (Healing+Defensive) ]")
-    battles_creatures = [(Flaming.create_base(), Normal), (Healing.create_base(), Defensive)]
+    battles_creatures = [
+        (Flaming.create_base(), Normal),
+        (Healing.create_base(), Defensive)
+        ]
     battle(battles_creatures)
     print()
-    
-    #------------Tournament 1 (error)------------#
+
+    # Tournament 1 (error)-----------------------
     print("Tournament 1 (error)")
     print("[ (Flameling+Aggressive), (Healing+Defensive) ]")
-    battles_creatures = [(Flaming.create_base(), Aggressive), (Healing.create_base(), Defensive)]
+    battles_creatures = [
+        (Flaming.create_base(), Aggressive),
+        (Healing.create_base(), Defensive)
+        ]
     battle(battles_creatures)
     print()
-    
-    #------------Tournament 2 (multiple)------------#
+
+    # Tournament 2 (multiple)--------------------
     print("Tournament 2 (multiple)")
     print("[ (Aquabub+Normal), (Healing+Defensive), (Transform+Aggressive) ]")
-    battles_creatures = [(Aquabub.create_base(), Normal), (Healing.create_base(), Defensive), (Transform.create_base(), Aggressive)]
+    battles_creatures = [
+        (Aquabub.create_base(), Normal),
+        (Healing.create_base(), Defensive),
+        (Transform.create_base(), Aggressive)
+        ]
     battle(battles_creatures)
     print()
-    

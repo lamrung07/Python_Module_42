@@ -159,7 +159,9 @@ if __name__ == "__main__":
     print("=== Code Nexus - Data Stream ===\n")
     stream = DataStream()
 
-    # Initial stats
+    # Initial stats handles input streams correctly. You need now to handle
+the output part of the pipeline. This will be achieved by using a plugin system for export
+classes, made export-compatible through duck typing
     print("Initialize Data Stream ...")
     stream.print_processors_stats()
     print()
