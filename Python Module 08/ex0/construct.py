@@ -3,6 +3,7 @@ import os
 import sys
 import site
 
+
 def ft_venv_detect():
     if sys.prefix == sys.base_prefix:
         print("\nMATRIX STATUS: You're still plugged in\n")
@@ -14,7 +15,8 @@ def ft_venv_detect():
         print("python3 -m venv <venv_name>")
         print("source <venv_name>/bin/activate # To activate on Unix")
         print("deactivate # To deactivate")
-        print(f"Global environment package locations: {site.getusersitepackages()}")
+        print(f"Global environment package locations: "
+              f"{site.getusersitepackages()}")
         print("\nThen run this program again.")
     else:
         print("\nMATRIX STATUS: Welcome to the construct\n")
@@ -25,6 +27,7 @@ def ft_venv_detect():
         print("Safe to install packages without affecting")
         print("the global system.\n")
         print(f"Package installation path:\n {site.getsitepackages()}")
-        
+
+
 if __name__ == "__main__":
     ft_venv_detect()

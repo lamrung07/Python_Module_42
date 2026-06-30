@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
+
 # Check installation
 def show_instruction() -> None:
     print("\nPip vs Poetry installation instructions")
     print("-" * 40)
     print("pip: pip install -r requirements.txt")
-    print("  - Uses requirements.txt | pip freeze > requirements.txt : save existed dependencies")
+    print("  - Uses requirements.txt | pip freeze > "
+          "requirements.txt : save existed dependencies")
     print("  - Manual dependency management")
     print("  - Manual virtual environment")
 
@@ -13,6 +15,7 @@ def show_instruction() -> None:
     print("  - Uses pyproject.toml")
     print("  - Automatic dependency resolution")
     print("  - Automatic virtual environment")
+
 
 def check_pandas() -> bool:
     try:
@@ -23,8 +26,9 @@ def check_pandas() -> bool:
         print("❌ pandas is NOT installed")
         show_instruction()
         return False
-        
-def check_numpy()-> bool:
+
+
+def check_numpy() -> bool:
     try:
         import numpy as np
         print(f"✅ numpy ({np.__version__}) - Numerical computation ready")
@@ -33,8 +37,9 @@ def check_numpy()-> bool:
         print("❌ numpy is NOT installed")
         show_instruction()
         return False
-        
-def check_requests()-> bool:
+
+
+def check_requests() -> bool:
     try:
         import requests as rq
         print(f"✅ requests ({rq.__version__}) - Network access ready")
@@ -44,8 +49,9 @@ def check_requests()-> bool:
         print("❌ request is NOT installed")
         show_instruction()
         return False
-        
-def check_matplotlib()-> bool:
+
+
+def check_matplotlib() -> bool:
     try:
         import matplotlib as plt
         print(f"✅ matplotlib ({plt.__version__}) - Visualization ready")
@@ -59,8 +65,11 @@ def check_matplotlib()-> bool:
 if __name__ == "__main__":
     print("📈 DATA ANALYSIS PROGRAM 📈")
     print("- Flow: Requests data using request -> Manipulate using pandas")
-    print("        Using numpy to calculate -> Using matplotlib for visualization")
-    print("❗When missing dependencies occur, program might stop and show installation instructions for pip and Poetry ❗\n")
+    print("        Using numpy to calculate -> "
+          "Using matplotlib for visualization")
+    print("❗When missing dependencies occur, "
+          "program might stop and show installation "
+          "instructions for pip and Poetry ❗\n")
 
     # Requests data to analyze
     check_rq = False
@@ -75,7 +84,8 @@ if __name__ == "__main__":
             "https://api.open-meteo.com/v1/forecast"
             "?latitude=48.8566"
             "&longitude=2.3522"
-            "&hourly=temperature_2m,precipitation,windspeed_10m,relativehumidity_2m"
+            "&hourly=temperature_2m,precipitation,"
+            "windspeed_10m,relativehumidity_2m"
             "&forecast_days=7"
             "&timezone=auto"
         )
@@ -123,4 +133,5 @@ if __name__ == "__main__":
         print(np.mean(matrix, axis=0))
         print("Simulated matrix shape:", simulated_matrix.shape)
     if check_plt:
-        print("\nTemperature Forecast complete!\nResults saved to: matrix_analysis.png")
+        print("\nTemperature Forecast complete!"
+              "\nResults saved to: matrix_analysis.png")

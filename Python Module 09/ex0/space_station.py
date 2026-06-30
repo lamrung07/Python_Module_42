@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
 from pydantic import BaseModel, Field, ValidationError
-from typing import Optional, List, Any
-from datetime import datetime, timezone
+from typing import Optional
+from datetime import datetime
+
 
 class SpaceStation(BaseModel):
     station_id: str = Field(min_length=3, max_length=10)
@@ -14,20 +15,21 @@ class SpaceStation(BaseModel):
     is_operational: bool = Field(default=True)
     notes: Optional[str] = Field(default=None, max_length=200)
 
+
 def main():
     try:
         MySpaceStation = SpaceStation(
                             station_id='2004',
                             name='MyTyson',
-                            crew_size = 90, 
-                            power_level = 40.9,
-                            oxygen_level = 30.23,
-                            last_maintenance = datetime.now(),
-                            is_operational= 'hello',
-                            notes = "Operational"
+                            crew_size=90,
+                            power_level=40.9,
+                            oxygen_level=30.23,
+                            last_maintenance=datetime.now(),
+                            is_operational='hello',
+                            notes="Operational"
                         )
     except ValidationError as e:
-        print ("Expected validation error:")
+        print("Expected validation error:")
         for error in e.errors():
             print(f"{error['msg']} (field: {error['loc'][0]})")
         return
@@ -41,6 +43,7 @@ def main():
     print(f"Oxygen: {MySpaceStation.oxygen_level}%")
     print(f"Status: {MySpaceStation.is_operational}")
     print("\n========================================")
+
 
 if __name__ == "__main__":
     main()
