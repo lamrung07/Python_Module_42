@@ -32,7 +32,7 @@ class Sproutling(Creature, HealCapability):
     def attack(self) -> str:
         return f"{self.name} uses Vine Whip!"
 
-    def heal(self) -> str:
+    def heal(self, target=None) -> str:
         return f"{self.name} heals for a small amount"
 
 
@@ -43,7 +43,7 @@ class Bloomelle(Creature, HealCapability):
     def attack(self) -> str:
         return f"{self.name} uses Petal Dance!"
 
-    def heal(self) -> str:
+    def heal(self, target=None) -> str:
         return f"{self.name} heals for a large amount"
 
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import typing
-from ex2 import FlameFactory, AquaFactory
-from ex2 import HealingCreatureFactory, TransformCreatureFactory
-from ex2 import NormalStrategy, AggressiveStrategy, DefensiveStrategy
+from .ex2 import FlameFactory, AquaFactory
+from .ex2 import HealingCreatureFactory, TransformCreatureFactory
+from .ex2 import NormalStrategy, AggressiveStrategy, DefensiveStrategy
 
 
 def battle(battles_creatures: list[tuple[typing.Any, typing.Any]]):
@@ -31,10 +31,10 @@ def battle(battles_creatures: list[tuple[typing.Any, typing.Any]]):
 
 if __name__ == "__main__":
     # Creating Creature--------------------------
-    Healing = HealingCreatureFactory
-    Transform = TransformCreatureFactory
-    Flaming = FlameFactory
-    Aquabub = AquaFactory
+    Healing = HealingCreatureFactory()
+    Transform = TransformCreatureFactory()
+    Flaming = FlameFactory()
+    Aquabub = AquaFactory()
 
     # Creating Strategies------------------------
     Normal = NormalStrategy()
